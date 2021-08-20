@@ -1,1 +1,0 @@
-# appsync-react-native-demo
