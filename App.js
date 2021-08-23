@@ -1,4 +1,4 @@
-import Amplify from "aws-amplify";
+import Amplify, { Auth } from "aws-amplify";
 import config from "./src/aws-exports";
 import { withAuthenticator } from "aws-amplify-react-native";
 
@@ -25,6 +25,12 @@ const App = () => {
     setFormState({ ...formState, [key]: value });
   }
 
+  async function signOut() {
+    return await Auth.signOut()
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+  }
+
   async function fetchTodos() {
     try {
       const todoData = await API.graphql(graphqlOperation(listTodos));
@@ -48,6 +54,7 @@ const App = () => {
 
   return (
     <View style={styles.container}>
+      <Button title="Sign Out" onPress={signOut} />
       <TextInput
         onChangeText={(val) => setInput("name", val)}
         style={styles.input}
