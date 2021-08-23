@@ -1,6 +1,7 @@
-import Expo from "expo";
-import Amplify from "aws-amplify";
-import config from "./src/aws-exports";
+import React from "react";
+import { registerRootComponent } from "expo";
+import Amplify, { Auth } from "aws-amplify";
+import AppSyncConfig from "./src/aws-exports";
 import { createAuthLink } from "aws-appsync-auth-link";
 import { createSubscriptionHandshakeLink } from "aws-appsync-subscription-link";
 import {
@@ -10,7 +11,7 @@ import {
   InMemoryCache,
 } from "@apollo/client";
 
-Amplify.configure(config);
+Amplify.configure(AppSyncConfig);
 
 import App from "./App";
 
@@ -18,7 +19,8 @@ const url = AppSyncConfig.aws_appsync_graphqlEndpoint;
 const region = AppSyncConfig.aws_appsync_region;
 const auth = {
   type: AppSyncConfig.aws_appsync_authenticationType,
-  apiKey: AppSyncConfig.aws_appsync_apiKey,
+  jwtToken: async () =>
+    (await Auth.currentSession()).getIdToken().getJwtToken(),
 };
 
 const link = ApolloLink.from([
@@ -37,4 +39,4 @@ const WithProvider = () => (
   </ApolloProvider>
 );
 
-export default Expo.registerRootComponent(WithProvider);
+export default registerRootComponent(WithProvider);

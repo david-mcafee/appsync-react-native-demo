@@ -2,6 +2,7 @@ import { Auth } from "aws-amplify";
 import { gql, useSubscription } from "@apollo/client";
 import { useMutation, useQuery } from "@apollo/client";
 import { withAuthenticator } from "aws-amplify-react-native";
+import { v4 as uuidv4 } from "uuid";
 
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TextInput, Button } from "react-native";
@@ -16,9 +17,9 @@ const App = () => {
   const [formState, setFormState] = useState(initialState);
   const [todos, setTodos] = useState([]);
 
-  useEffect(() => {
-    fetchTodos();
-  }, []);
+  // useEffect(() => {
+  //   fetchTodos();
+  // }, []);
 
   function setInput(key, value) {
     setFormState({ ...formState, [key]: value });
@@ -170,7 +171,8 @@ const App = () => {
 
   return (
     <View style={styles.container}>
-      <Text>"Todos using Apollo V3"</Text>
+      <Text>{"Todos using Apollo V3"}</Text>
+      <Text>{status}</Text>
       <Button title="Sign Out" onPress={signOut} />
       <TextInput
         onChangeText={(val) => setInput("name", val)}
