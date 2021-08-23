@@ -6,10 +6,6 @@ import { v4 as uuidv4 } from "uuid";
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TextInput, Button } from "react-native";
 
-// import { API, graphqlOperation } from "aws-amplify";
-// import { createTodo } from "./src/graphql/mutations";
-// import { listTodos } from "./src/graphql/queries";
-
 const initialState = { name: "", description: "" };
 
 const App = () => {
@@ -123,22 +119,6 @@ const App = () => {
       }
     }
   `;
-
-  // const CREATE_TODO_SUBSCRIPTION = gql`
-  //   subscription OnCreateTodo(
-  //     $input: CreateTodoInput!
-  //     $condition: ModelTodoConditionInput
-  //   ) {
-  //     onCreateTodo(input: $input, condition: $condition) {
-  //       id
-  //       name
-  //       description
-  //       createdAt
-  //       updatedAt
-  //       owner
-  //     }
-  //   }
-  // `;
 
   const { data: createSubData, error: createSubError } = useSubscription(
     CREATE_TODO_SUBSCRIPTION
