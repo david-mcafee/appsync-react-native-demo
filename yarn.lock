@@ -3262,6 +3262,15 @@ aws-appsync-auth-link@^3.0.6:
     aws-sdk "^2.814.0"
     debug "2.6.9"
 
+aws-appsync-subscription-link@^3.0.8:
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/aws-appsync-subscription-link/-/aws-appsync-subscription-link-3.0.8.tgz#2585635c44963641becf3b373045a3281da34c14"
+  integrity sha512-KFEROiQX9+nHIG0UFV9rXo7P1vlqe26SRrb8uP23ivzQ3cpIk6rGqhIwecFj2+C0NDWjh3D4yrMYkmO3JbRAoA==
+  dependencies:
+    aws-appsync-auth-link "^3.0.6"
+    debug "2.6.9"
+    url "^0.11.0"
+
 aws-sdk@^2.814.0:
   version "2.974.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.974.0.tgz#4380e4746b2a799e3833a0ab021f3292b045ac63"
