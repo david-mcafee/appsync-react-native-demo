@@ -58,6 +58,8 @@ const App = () => {
         id
         name
         description
+        createdAt
+        updatedAt
       }
     }
   `;
@@ -110,16 +112,33 @@ const App = () => {
     }
   }
 
-  // Subscriptions
   const CREATE_TODO_SUBSCRIPTION = gql`
     subscription OnCreateTodo {
       onCreateTodo {
         id
         name
         description
+        createdAt
+        updatedAt
       }
     }
   `;
+
+  // const CREATE_TODO_SUBSCRIPTION = gql`
+  //   subscription OnCreateTodo(
+  //     $input: CreateTodoInput!
+  //     $condition: ModelTodoConditionInput
+  //   ) {
+  //     onCreateTodo(input: $input, condition: $condition) {
+  //       id
+  //       name
+  //       description
+  //       createdAt
+  //       updatedAt
+  //       owner
+  //     }
+  //   }
+  // `;
 
   const { data: createSubData, error: createSubError } = useSubscription(
     CREATE_TODO_SUBSCRIPTION

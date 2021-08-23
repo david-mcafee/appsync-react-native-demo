@@ -11,10 +11,9 @@ import {
   InMemoryCache,
 } from "@apollo/client";
 import { withAuthenticator } from "aws-amplify-react-native";
+import App from "./App";
 
 Amplify.configure(AppSyncConfig);
-
-import App from "./App";
 
 const url = AppSyncConfig.aws_appsync_graphqlEndpoint;
 const region = AppSyncConfig.aws_appsync_region;
