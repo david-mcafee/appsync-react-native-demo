@@ -10,6 +10,7 @@ import {
   ApolloProvider,
   InMemoryCache,
 } from "@apollo/client";
+import { withAuthenticator } from "aws-amplify-react-native";
 
 Amplify.configure(AppSyncConfig);
 
@@ -39,4 +40,4 @@ const WithProvider = () => (
   </ApolloProvider>
 );
 
-export default registerRootComponent(WithProvider);
+export default registerRootComponent(withAuthenticator(WithProvider));

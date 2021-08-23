@@ -1,7 +1,6 @@
 import { Auth } from "aws-amplify";
 import { gql, useSubscription } from "@apollo/client";
 import { useMutation, useQuery } from "@apollo/client";
-import { withAuthenticator } from "aws-amplify-react-native";
 import { v4 as uuidv4 } from "uuid";
 
 import React, { useEffect, useState } from "react";
@@ -17,10 +16,6 @@ const App = () => {
   const [formState, setFormState] = useState(initialState);
   const [todos, setTodos] = useState([]);
 
-  // useEffect(() => {
-  //   fetchTodos();
-  // }, []);
-
   function setInput(key, value) {
     setFormState({ ...formState, [key]: value });
   }
@@ -30,27 +25,6 @@ const App = () => {
       .then((data) => console.log(data))
       .catch((err) => console.log(err));
   }
-
-  // async function fetchTodos() {
-  //   try {
-  //     const todoData = await API.graphql(graphqlOperation(listTodos));
-  //     const todos = todoData.data.listTodos.items;
-  //     setTodos(todos);
-  //   } catch (err) {
-  //     console.log("error fetching todos");
-  //   }
-  // }
-
-  // async function addTodo() {
-  //   try {
-  //     const todo = { ...formState };
-  //     setTodos([...todos, todo]);
-  //     setFormState(initialState);
-  //     await API.graphql(graphqlOperation(createTodo, { input: todo }));
-  //   } catch (err) {
-  //     console.log("error creating todo:", err);
-  //   }
-  // }
 
   // List
   const LIST_TODOS = gql`
@@ -113,28 +87,28 @@ const App = () => {
   }
 
   // Delete
-  // const DELETE_TODO = gql`
-  //   mutation deleteTodo($input: DeleteTodoInput!) {
-  //     deleteTodo(input: $input) {
-  //       id
-  //       name
-  //       description
-  //     }
-  //   }
-  // `;
+  const DELETE_TODO = gql`
+    mutation deleteTodo($input: DeleteTodoInput!) {
+      deleteTodo(input: $input) {
+        id
+        name
+        description
+      }
+    }
+  `;
 
   // Optional: use `data`, `loading`, and `error`
-  // const [deleteTodoMutateFunction] = useMutation(DELETE_TODO, {
-  //   refetchQueries: [LIST_TODOS, "listTodos"],
-  // });
+  const [deleteTodoMutateFunction] = useMutation(DELETE_TODO, {
+    refetchQueries: [LIST_TODOS, "listTodos"],
+  });
 
-  // async function removeTodo(id) {
-  //   try {
-  //     deleteTodoMutateFunction({ variables: { input: { id } } });
-  //   } catch (err) {
-  //     console.log("error deleting todo:", err);
-  //   }
-  // }
+  async function removeTodo(id) {
+    try {
+      deleteTodoMutateFunction({ variables: { input: { id } } });
+    } catch (err) {
+      console.log("error deleting todo:", err);
+    }
+  }
 
   // Subscriptions
   const CREATE_TODO_SUBSCRIPTION = gql`
@@ -191,6 +165,7 @@ const App = () => {
         <View key={todo.id ? todo.id : index} style={styles.todo}>
           <Text style={styles.todoName}>{todo.name}</Text>
           <Text>{todo.description}</Text>
+          <Button title="Delete" onPress={() => removeTodo(todo.id)} />
         </View>
       ))}
     </View>
@@ -204,4 +179,4 @@ const styles = StyleSheet.create({
   todoName: { fontSize: 18 },
 });
 
-export default withAuthenticator(App);
+export default App;

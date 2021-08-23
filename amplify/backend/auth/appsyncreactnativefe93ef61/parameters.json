@@ -1,6 +1,6 @@
 {
     "identityPoolName": "appsyncreactnativefe93ef61_identitypool_fe93ef61",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "appsynfe93ef61",
     "userPoolName": "appsyncreactnativefe93ef61_userpool_fe93ef61",
     "autoVerifiedAttributes": [

@@ -1,0 +1,21 @@
+{
+    "appName": "appsyncreactnative",
+    "roleName": "pinpointLambdaRolee36fa204",
+    "cloudformationPolicyName": "cloudformationPolicye36fa204",
+    "cloudWatchPolicyName": "cloudWatchPolicye36fa204",
+    "pinpointPolicyName": "pinpointPolicye36fa204",
+    "authPolicyName": "pinpoint_amplify_e36fa204",
+    "unauthPolicyName": "pinpoint_amplify_e36fa204",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    }
+}
