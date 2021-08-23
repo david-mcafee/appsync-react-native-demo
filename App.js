@@ -1,17 +1,14 @@
-import Amplify, { Auth } from "aws-amplify";
-import config from "./src/aws-exports";
+import { Auth } from "aws-amplify";
 import { gql, useSubscription } from "@apollo/client";
 import { useMutation, useQuery } from "@apollo/client";
 import { withAuthenticator } from "aws-amplify-react-native";
 
-Amplify.configure(config);
-
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TextInput, Button } from "react-native";
 
-import { API, graphqlOperation } from "aws-amplify";
-import { createTodo } from "./src/graphql/mutations";
-import { listTodos } from "./src/graphql/queries";
+// import { API, graphqlOperation } from "aws-amplify";
+// import { createTodo } from "./src/graphql/mutations";
+// import { listTodos } from "./src/graphql/queries";
 
 const initialState = { name: "", description: "" };
 

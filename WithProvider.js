@@ -1,6 +1,8 @@
+import Expo from "expo";
+import Amplify from "aws-amplify";
+import config from "./src/aws-exports";
 import { createAuthLink } from "aws-appsync-auth-link";
 import { createSubscriptionHandshakeLink } from "aws-appsync-subscription-link";
-
 import {
   ApolloLink,
   ApolloClient,
@@ -8,7 +10,7 @@ import {
   InMemoryCache,
 } from "@apollo/client";
 
-import AppSyncConfig from "./aws-exports";
+Amplify.configure(config);
 
 import App from "./App";
 
@@ -35,4 +37,4 @@ const WithProvider = () => (
   </ApolloProvider>
 );
 
-export default WithProvider;
+export default Expo.registerRootComponent(WithProvider);
