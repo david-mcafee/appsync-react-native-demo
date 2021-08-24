@@ -60,6 +60,7 @@ const App = ({ todos, data, createTodo }) => {
   }
 
   function addTodo() {
+    setFormState(initialState);
     createTodo({
       name: formState.name,
       description: formState.description,
