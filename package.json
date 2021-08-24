@@ -8,12 +8,16 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@apollo/client": "^3.4.8",
     "@react-native-async-storage/async-storage": "^1.15.6",
     "@react-native-community/netinfo": "^6.0.0",
     "aws-amplify": "^4.2.4",
     "aws-amplify-react-native": "^5.0.3",
+    "aws-appsync-auth-link": "^3.0.6",
+    "aws-appsync-subscription-link": "^3.0.8",
     "expo": "~42.0.1",
     "expo-status-bar": "~1.0.4",
+    "graphql": "^14.7.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
