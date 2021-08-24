@@ -30,11 +30,11 @@ const listTodos = gql`
 `;
 
 // TODO: add to react web demo
-const PostSubscription = gql`
-  subscription postSubscription {
-    onCreatePost {
-      id
+const TodoSubscription = gql`
+  subscription OnCreateTodo {
+    onCreateTodo {
       name
+      description
     }
   }
 `;
@@ -46,7 +46,7 @@ const App = ({ todos, data, createTodo }) => {
   // const [todosState, setTodos] = useState([]);
 
   useEffect(() => {
-    data?.subscribeToMore(buildSubscription(PostSubscription, listPosts));
+    data?.subscribeToMore(buildSubscription(TodoSubscription, listPosts));
   }, []);
 
   function setInput(key, value) {
@@ -60,11 +60,11 @@ const App = ({ todos, data, createTodo }) => {
   }
 
   function addTodo() {
-    setFormState(initialState);
     createTodo({
       name: formState.name,
       description: formState.description,
     });
+    setFormState(initialState);
   }
 
   return (
