@@ -6,6 +6,7 @@ import { graphqlMutation } from "aws-appsync-react";
 import { buildSubscription } from "aws-appsync";
 import { View, Text, StyleSheet, TextInput, Button } from "react-native";
 
+// TODO: fix ID bug on multiple todo creation
 // include description in docs to match default setup
 const CreateTodo = gql`
   mutation createTodo($name: String!, $description: String!) {
