@@ -12,6 +12,8 @@ import {
 } from "@apollo/client";
 import { withAuthenticator } from "aws-amplify-react-native";
 import App from "./App";
+import { Rehydrated } from "aws-appsync-react";
+import AWSAppSyncClient from "aws-appsync";
 
 Amplify.configure(AppSyncConfig);
 
@@ -28,14 +30,16 @@ const link = ApolloLink.from([
   createSubscriptionHandshakeLink({ url, region, auth }),
 ]);
 
-const client = new ApolloClient({
+const client = new AWSAppSyncClient({
   link,
   cache: new InMemoryCache(),
 });
 
 const WithProvider = () => (
   <ApolloProvider client={client}>
-    <App />
+    <Rehydrated>
+      <App />
+    </Rehydrated>
   </ApolloProvider>
 );
 
