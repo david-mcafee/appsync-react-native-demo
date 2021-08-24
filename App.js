@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import gql from "graphql-tag";
 import { graphql, compose } from "react-apollo";
 import { graphqlMutation } from "aws-appsync-react";
@@ -41,14 +41,12 @@ const PostSubscription = gql`
 
 const initialState = { name: "", description: "" };
 
-const App = () => {
+const App = ({ todos, data, createTodo }) => {
   const [formState, setFormState] = useState(initialState);
-  const [todos, setTodos] = useState([]);
+  // const [todosState, setTodos] = useState([]);
 
   useEffect(() => {
-    this.props.data.subscribeToMore(
-      buildSubscription(PostSubscription, listPosts)
-    );
+    data?.subscribeToMore(buildSubscription(PostSubscription, listPosts));
   }, []);
 
   function setInput(key, value) {
@@ -61,11 +59,12 @@ const App = () => {
       .catch((err) => console.log(err));
   }
 
-  addTodo = () =>
-    this.props.createTodo({
-      name: this.state.name,
-      description: this.state.description,
+  function addTodo() {
+    createTodo({
+      name: formState.name,
+      description: formState.description,
     });
+  }
 
   return (
     <View style={styles.container}>
@@ -89,7 +88,6 @@ const App = () => {
         <View key={todo.id ? todo.id : index} style={styles.todo}>
           <Text style={styles.todoName}>{todo.name}</Text>
           <Text>{todo.description}</Text>
-          <Button title="Delete" onPress={() => removeTodo(todo.id)} />
         </View>
       ))}
     </View>
