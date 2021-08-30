@@ -1,4 +1,4 @@
-# AppSync SDK Testing Demo
+# AppSync SDK Testing Demo / Apollo V3
 
 ## Getting Started:
 
